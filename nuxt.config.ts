@@ -6,5 +6,6 @@ export default defineNuxtConfig({
 		public: {
 			mapApiKey: ''
 		}
-	}
+	},
+	ssr: false,
 })

@@ -1,11 +1,21 @@
 <script setup lang="ts">
-defineProps<{
+import type { MapOpts } from "~/composables/useMapGL";
+
+const props = defineProps<{
 	width: number | string
 	height: number | string
+	mapOpts: MapOpts
 }>()
 
-const mapGL = useMapGL()
+const mapGL = useMapGL(props.mapOpts)
 const mapRef = shallowRef()
+const mapOpts = computed(()  => props.mapOpts)
+
+watch(mapOpts, newOpts => {
+	if (newOpts.lng && newOpts.lat) {
+		mapGL.goto(newOpts.lng, newOpts.lat)
+	}
+})
 
 
 onMounted(() => {
@@ -16,9 +26,6 @@ onUnmounted(() => {
 	mapGL.destroyMap()
 })
 
-watch(mapGL.map, v => {
-	console.log(v)
-})
 
 </script>
 

@@ -7,29 +7,42 @@ export type MapOpts = {
 	zoom?: number
 }
 
-export default () => {
-	const configs = useRuntimeConfig()
+export type MapSafeOpts = {
+	lng: number
+	lat: number
+	zoom: number
+}
+
+const defaultMapOpts: MapSafeOpts = {
+	lng: 105.84108235711108,
+	lat: 21.02257440672384,
+	zoom: 14,
+}
+
+export default (opts: MapOpts = defaultMapOpts) => {
+	const _configs = useRuntimeConfig()
+	const _mapApiKey = _configs.public.mapApiKey
+
+	const mapOpts: MapSafeOpts = Object.assign(defaultMapOpts, opts)
 	const map: ShallowRef<Map | undefined> = useState('map')
-	const mapApiKey = configs.public.mapApiKey
-	const defaultMapOpts: MapOpts = {
-		lng: 105.84108235711108,
-		lat: 21.02257440672384,
-		zoom: 10
-	}
-	const initMap = (rawContainer: HTMLElement, opts: MapOpts = defaultMapOpts) => {
-		const combinedOpts = Object.assign(defaultMapOpts, opts)
+
+	const initMap = (rawContainer: HTMLElement) => {
 		map.value = markRaw(new Map({
 			container: rawContainer,
-			style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${mapApiKey}`,
-			center: [combinedOpts.lng ?? 0, combinedOpts.lat ?? 0],
-			zoom: combinedOpts.zoom,
+			style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${_mapApiKey}`,
+			center: [mapOpts.lng, mapOpts.lat],
+			zoom: mapOpts.zoom,
 		}));
 	}
 	const destroyMap = () => map.value?.remove()
+	const goto = (lng: number, lat: number) => {
+		map.value?.setCenter({ lng, lat })
+	}
 
 	return {
-		map,
+		mapOpts,
 		initMap,
 		destroyMap,
+		goto,
 	}
 }
