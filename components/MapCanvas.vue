@@ -2,8 +2,6 @@
 import type { MapOpts } from "~/composables/useMapGL";
 
 const props = defineProps<{
-	width: number | string
-	height: number | string
 	mapOpts: MapOpts
 }>()
 
@@ -30,7 +28,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-	<div ref="mapRef" :style="{width, height}"></div>
+	<div ref="mapRef"></div>
 </template>
 
 <style scoped>
