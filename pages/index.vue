@@ -55,14 +55,15 @@ function removeTag(tagId: number) {
 			        size="sm"
 			        class="cursor-pointer hover:bg-primary-600">
 				{{ tag.label }}&nbsp;&nbsp;
-				<span class="border-2 border-white dark:border-gray-900 rounded-full w-5 h-5 leading-none"
-				      style="margin-right: -3px; padding: 1px 4px">×</span>
+				<span
+					class="border-2 border-white dark:border-gray-900 rounded-full w-5 h-5 text-center"
+					style="margin-right: -4px; line-height: normal;">×</span>
 			</UBadge>
 		</div>
 		<div class="flex gap-2 mt-7 flex-col sm:flex-row">
-			<USelectMenu class="flex-grow" searchable size="md" v-model="selectedTags" :options="tags" multiple
+			<USelectMenu class="flex-grow" searchable size="xl" v-model="selectedTags" :options="tags" multiple
 			             placeholder="Pick some tags..."/>
-			<UButton :loading="btnLoading" @click="search" size="md" class="justify-center">Lookup near me!</UButton>
+			<UButton :loading="btnLoading" @click="search" size="lg" class="justify-center">Lookup near me!</UButton>
 		</div>
 	</div>
 </template>
