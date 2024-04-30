@@ -28,10 +28,10 @@ const btnLoading = ref(false)
 function search() {
 	btnLoading.value = true
 	navigator.geolocation.getCurrentPosition(pos => {
-		// userFilters.location.value = {
-		// 	lng: pos.coords.longitude,
-		// 	lat: pos.coords.latitude,
-		// }
+		userFilters.location.value = {
+			lng: pos.coords.longitude,
+			lat: pos.coords.latitude,
+		}
 		navigateTo(`/map`)
 	}, err => {
 		console.log(err)
@@ -59,10 +59,10 @@ function removeTag(tagId: number) {
 				      style="margin-right: -3px; padding: 1px 4px">×</span>
 			</UBadge>
 		</div>
-		<div class="flex gap-2 mt-7 justify-center">
+		<div class="flex gap-2 mt-7 flex-col sm:flex-row">
 			<USelectMenu class="flex-grow" searchable size="md" v-model="selectedTags" :options="tags" multiple
 			             placeholder="Pick some tags..."/>
-			<UButton :loading="btnLoading" @click="search" size="md">Lookup near me!</UButton>
+			<UButton :loading="btnLoading" @click="search" size="md" class="justify-center">Lookup near me!</UButton>
 		</div>
 	</div>
 </template>
