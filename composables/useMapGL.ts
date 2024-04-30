@@ -1,5 +1,5 @@
 import type { ShallowRef } from "@vue/reactivity";
-import { Map } from "maplibre-gl";
+import { Map, Marker } from "maplibre-gl";
 
 export type MapOpts = {
 	lng?: number
@@ -39,10 +39,17 @@ export default (opts: MapOpts = defaultMapOpts) => {
 		map.value?.setCenter({ lng, lat })
 	}
 
+	function addMarkers(markers: Marker[] = []) {
+		if (map.value) {
+			markers.forEach(m => m.addTo(<Map>map.value))
+		}
+	}
+
 	return {
 		mapOpts,
 		initMap,
 		destroyMap,
 		goto,
+		addMarkers,
 	}
 }

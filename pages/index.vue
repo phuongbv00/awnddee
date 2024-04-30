@@ -7,10 +7,10 @@ const config = useRuntimeConfig()
 
 const appName = config.public.appName
 
-const supabaseClient = useSupabaseClient<Database>()
+const supabase = useSupabaseClient<Database>()
 
 const { data: $tags } = await useAsyncData('get_tags', async () => {
-	const { data } = await supabaseClient.from('tags').select('id, label')
+	const { data } = await supabase.from('tags').select('id, label')
 	return data
 })
 const tags = computed(() => $tags.value ?? [])
@@ -28,10 +28,10 @@ const btnLoading = ref(false)
 function search() {
 	btnLoading.value = true
 	navigator.geolocation.getCurrentPosition(pos => {
-		userFilters.location.value = {
-			lng: pos.coords.longitude,
-			lat: pos.coords.latitude,
-		}
+		// userFilters.location.value = {
+		// 	lng: pos.coords.longitude,
+		// 	lat: pos.coords.latitude,
+		// }
 		navigateTo(`/map`)
 	}, err => {
 		console.log(err)
@@ -55,7 +55,7 @@ function removeTag(tagId: number) {
 			        size="sm"
 			        class="cursor-pointer hover:bg-primary-600">
 				{{ tag.label }}&nbsp;&nbsp;
-				<span class="border-2 dark:border-gray-900 rounded-full w-5 h-5 leading-none"
+				<span class="border-2 border-white dark:border-gray-900 rounded-full w-5 h-5 leading-none"
 				      style="margin-right: -3px; padding: 1px 4px">×</span>
 			</UBadge>
 		</div>
