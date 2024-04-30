@@ -33,6 +33,7 @@ const markers = computed(() => places.value
 onMounted(() => {
 	console.log(markers.value)
 	mapGL.addMarkers(markers.value)
+	mapGL.addMarkers([new Marker().setLngLat(userFilters.location.value)])
 })
 
 </script>
