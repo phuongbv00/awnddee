@@ -32,5 +32,4 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-@import "maplibre-gl/dist/maplibre-gl.css";
 </style>

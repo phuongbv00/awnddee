@@ -11,5 +11,6 @@ export default defineNuxtConfig({
 	ssr: false,
 	supabase: {
 		redirect: false,
-	}
+	},
+	css: ['maplibre-gl/dist/maplibre-gl.css'],
 })
