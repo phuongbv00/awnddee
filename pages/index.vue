@@ -46,18 +46,16 @@ function removeTag(tagId: number) {
 </script>
 
 <template>
-	<div class="flex flex-col justify-center h-dvh p-3 max-w-md m-auto">
+	<div class="flex flex-col justify-center h-full p-3 max-w-md m-auto">
 		<h1 class="block text-center text-6xl text-gray-700 mb-10">{{ appName }}</h1>
 		<div class="flex flex-wrap gap-2 justify-center">
 			<UBadge v-for="tag of selectedTags"
 			        @click="removeTag(tag.id)"
 			        :ui="{ rounded: 'rounded-full' }"
 			        size="sm"
-			        class="cursor-pointer hover:bg-primary-600">
-				{{ tag.label }}&nbsp;&nbsp;
-				<span
-					class="border-2 border-white dark:border-gray-900 rounded-full w-5 h-5 text-center"
-					style="margin-right: -4px; line-height: normal;">×</span>
+			        class="cursor-pointer hover:bg-primary-600 leading-5">
+				{{ tag.label }}&nbsp;
+				<UIcon name="i-heroicons-x-circle" style="margin-right: -4px;" class="text-xl"/>
 			</UBadge>
 		</div>
 		<div class="flex gap-2 mt-7 flex-col sm:flex-row">
@@ -65,6 +63,7 @@ function removeTag(tagId: number) {
 			             placeholder="Pick some tags..."/>
 			<UButton :loading="btnLoading" @click="search" size="lg" class="justify-center">Lookup near me!</UButton>
 		</div>
+		<h1 class="block text-center text-6xl text-transparent mb-10">{{ appName }}</h1>
 	</div>
 </template>
 

@@ -7,8 +7,13 @@ export default () => {
 	});
 	const selectedTags = useStorage<number[]>('selectedTags', [])
 
+	function isValid() {
+		return location.value.lat !== 0 && location.value.lng !== 0 && selectedTags.value.length > 0
+	}
+
 	return {
 		location,
 		selectedTags,
+		isValid,
 	}
 }

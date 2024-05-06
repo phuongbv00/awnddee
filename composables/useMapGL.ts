@@ -32,6 +32,7 @@ export default (opts: MapOpts = defaultMapOpts) => {
 			style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${_mapApiKey}`,
 			center: [mapOpts.lng, mapOpts.lat],
 			zoom: mapOpts.zoom,
+			attributionControl: false,
 		}));
 	}
 	const destroyMap = () => map.value?.remove()
