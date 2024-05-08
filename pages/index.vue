@@ -60,7 +60,8 @@ function removeTag(tagId: number) {
 		</div>
 		<div class="flex gap-2 mt-7 flex-col sm:flex-row">
 			<USelectMenu class="flex-grow" searchable size="xl" v-model="selectedTags" :options="tags" multiple
-			             placeholder="Pick some tags..."/>
+			             placeholder="Pick some tags..."
+			             :popper="{placement: 'top'}"/>
 			<UButton :loading="btnLoading" @click="search" size="lg" class="justify-center">Lookup near me!</UButton>
 		</div>
 		<h1 class="block text-center text-6xl text-transparent mb-10">{{ appName }}</h1>
